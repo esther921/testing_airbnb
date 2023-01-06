@@ -3,22 +3,9 @@ import { RxDotFilled } from "react-icons/rx";
 import { AiOutlineStar } from "react-icons/ai";
 import Link from "next/link";
 import { useState } from "react";
+import { listingProp } from "types/listingInterface";
 
-type listingCardProps = {
-  name: string;
-  address: string;
-  price: string;
-  id: string;
-  photos: string[];
-};
-
-export function ListingCard({
-  name,
-  address,
-  price,
-  id,
-  photos,
-}: listingCardProps) {
+export function ListingCard({ name, address, price, id, photos }: listingProp) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {

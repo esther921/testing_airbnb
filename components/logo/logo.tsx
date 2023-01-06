@@ -6,7 +6,7 @@ export function Logo() {
       <Image
         style={{ width: "auto", height: "auto" }}
         src="/images/logo.svg"
-        alt="vercel log"
+        alt="hotels logo"
         width={50}
         height={24}
       />
