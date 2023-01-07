@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiURL } from "constants/apiURL";
 import { listingProp } from "types/listingInterface";
 
 const getAllListingsIds = async () => {
   try {
     const resp = await axios.get(
-      `http://localhost:3200/listings
+      `${apiURL}/listings
                 `
     );
 

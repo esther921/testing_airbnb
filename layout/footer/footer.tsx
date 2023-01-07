@@ -47,7 +47,7 @@ export function Footer() {
               className="mr-2 sm:text-gray-500 text-gray-600 "
             />
             <span className="text-[14px] capitalize font-semibold  text-gray-600">
-              english(us)
+              english(US)
             </span>
           </a>
           <a className="flex items-center  mx-3" href="">

@@ -20,8 +20,11 @@ export function ListingCard({ name, address, price, id, photos }: listingProp) {
     setCurrentIndex(newIndex);
   };
   return (
-    <div>
-      <div className="max-w-[280px] h-[260px] relative group">
+    <div className="md:flex md:flex-col md:items-center">
+      <div
+        className="md:w-[90%] md:h-[310px] w-[280px] h-[260px] relative group  "
+        onScroll={() => console.log("scrolled")}
+      >
         <Link href={`/listings/${id}`}>
           <div
             style={{ backgroundImage: `url(${photos[currentIndex]})` }}
@@ -42,30 +45,31 @@ export function ListingCard({ name, address, price, id, photos }: listingProp) {
           ))}
         </div>
       </div>
-
-      <Link href={`/listings/${id}`}>
-        <div>
-          <div className="flex justify-between mt-3">
-            <h4 className="font-bold text-gray-700 text-medium capitalize ">
-              {name}
-            </h4>
-            <div className="flex items-center">
-              <AiOutlineStar
-                size={16}
-                className="fill-gray-600 stroke-gray-600"
-              />
-              <span className="text-sm ml-1 font-semibold">4</span>
+      <div className="md:w-[90%]">
+        <Link href={`/listings/${id}`}>
+          <div>
+            <div className="flex justify-between mt-3">
+              <h4 className="font-bold text-gray-700 text-medium capitalize ">
+                {name}
+              </h4>
+              <div className="flex items-center">
+                <AiOutlineStar
+                  size={16}
+                  className="fill-gray-600 stroke-gray-600"
+                />
+                <span className="text-sm ml-1 font-semibold">4</span>
+              </div>
+            </div>
+            <p className="text-sm my-1 font-light text-gray-500 ">{address}</p>
+            <div>
+              <span className="text-sm font-bold text-gray-700">${price}</span>
+              <span className="text-sm font-semibold text-gray-600 capitalize ml-1">
+                night
+              </span>
             </div>
           </div>
-          <p className="text-sm my-1 font-light text-gray-500 ">{address}</p>
-          <div>
-            <span className="text-sm font-bold text-gray-700">${price}</span>
-            <span className="text-sm font-semibold text-gray-600 capitalize ml-1">
-              night
-            </span>
-          </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }

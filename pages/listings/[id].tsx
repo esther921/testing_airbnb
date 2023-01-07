@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Logo from "@/components/logo";
 import SearchLocation from "@/components/search";
 import Profile from "@/components/profile";
@@ -10,6 +11,9 @@ import { BsHouseDoor, BsCheck2Circle, BsWifi } from "react-icons/bs";
 import { MdKitchen, MdOutlineBathroom, MdPool } from "react-icons/md";
 import { CgScreen } from "react-icons/cg";
 import { propertyProp } from "types/listingInterface";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { apiURL } from "constants/apiURL";
 
 export const getStaticPaths = async () => {
   const paths = await getAllListingsIds();
@@ -20,7 +24,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (params: { id: string | number }) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
   const listingData = await getListingData(params.id);
 
   return {
@@ -30,52 +38,76 @@ export const getStaticProps = async (params: { id: string | number }) => {
   };
 };
 
-export default function Property(listingData: { listings: propertyProp[] }) {
-  const [listing] = listingData.listings;
+type listingDataProp = {
+  listingData: {
+    id: string;
+    listings: propertyProp[];
+  };
+};
+
+export default function Property({ listingData }: listingDataProp) {
+  const query = useQuery(
+    ["listing"],
+    () => {
+      return axios(`${apiURL}/listings?id=${listingData.id}`) as any;
+    },
+    {
+      initialData: {
+        data: listingData.listings,
+      },
+    }
+  );
+
+  const [listing] = query.data.data;
 
   return (
     <>
+      <Head>
+        <title>Hotels&Co </title>
+        <meta name="description" content="Hotels&Co website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <Header>
         <Logo />
         <SearchLocation />
         <Profile />
       </Header>
-      <main className="px-14 pt-[80px]">
-        <div className="pt-4">
-          <h4 className=" text-[19px] mb-4 font-bold leading-8 md:text-base md:mb-3 capitalize max-w-2xl">
+      <main className="md:px-0 px-14 pt-[80px]">
+        <div className="pt-4 md:px-6">
+          <h4 className="md: text-[19px] mb-4 font-bold leading-8 md:text-2xl md:mb-3 capitalize max-w-2xl">
             {listing.name}
           </h4>
           <div className="flex items-center">
             <BiMap size={17} className="text-gray-500 mr-2" />
-            <p className="subtitle font-semibold text-[13px] truncate underline ">
+            <p className="md:text-sm subtitle font-semibold text-[13px] truncate underline ">
               {listing.address}
             </p>
           </div>
         </div>
-        <div className=" grid grid-cols-4 gap-2 h-[400px] mt-6">
+        <div className="grid grid-cols-4 gap-2 h-[400px] mt-6">
           <div
             style={{ backgroundImage: `url(${listing.photos[0]})` }}
-            className="w-full col-span-2 row-span-2 bg-center bg-cover rounded-l-2xl rounded-r-none"
+            className="md:col-span-4 md:w-[100%] md:rounded-none col-span-2 row-span-2 bg-center bg-cover rounded-l-2xl rounded-r-none"
           ></div>
           <div
             style={{ backgroundImage: `url(${listing.photos[1]})` }}
-            className="bg-center bg-cover"
+            className="md:hidden bg-center bg-cover"
           ></div>
           <div
             style={{ backgroundImage: `url(${listing.photos[2]})` }}
-            className="bg-center bg-cover rounded-tr-2xl"
+            className="md:hidden  bg-center bg-cover rounded-tr-2xl"
           ></div>
           <div
             style={{ backgroundImage: `url(${listing.photos[3]})` }}
-            className="bg-center bg-cover "
+            className="md:hidden  bg-center bg-cover "
           ></div>
           <div
             style={{ backgroundImage: `url(${listing.photos[4]})` }}
-            className="bg-center bg-cover rounded-br-2xl"
+            className="md:hidden  bg-center bg-cover rounded-br-2xl"
           ></div>
         </div>
-        <div className=" grid grid-cols-4 gap-4 mb-16">
-          <div className="flex flex-wrap md:grid md:grid-cols-2 md:gap-7 border border-gray-200 rounded-md py-5 px-6 w-full h-24 justify-between items-center mt-4 col-span-3 row-span-1">
+        <div className="md:flex md:flex-col grid grid-cols-4 gap-4 mb-16">
+          <div className="md:hidden flex flex-wrap  border border-gray-200 rounded-md py-5 px-6 w-full h-24 justify-between items-center mt-4 col-span-3 row-span-1">
             <div>
               <p className="capitalize text-sm font-semibold text-gray-500 mb-3">
                 Bedrooms
@@ -197,7 +229,7 @@ export default function Property(listingData: { listings: propertyProp[] }) {
               </div>
             </div>
           </div>
-          <div className="col-span-3 mt-[-25%]">
+          <div className="md:mt-6 px-4 col-span-3 mt-[-25%]">
             <h4 className="font-bold mb-3">About this listing</h4>
             <div>
               <div className="markdown font-medium text-[15px] text-gray-500 leading-7">

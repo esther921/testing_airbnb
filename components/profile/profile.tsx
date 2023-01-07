@@ -3,7 +3,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 
 export function Profile() {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center md:hidden">
       <a className="text-sm cursor-pointer capitalize hover:bg-gray-50 rounded-md py-[6px] px-3 font-bold text-gray-600">
         become a host
       </a>
