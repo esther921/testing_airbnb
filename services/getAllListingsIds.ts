@@ -5,7 +5,7 @@ import { listingProp } from "types/listingInterface";
 const getAllListingsIds = async () => {
   try {
     const resp = await axios.get(
-      `${apiURL}/listings?_limit=20
+      `${apiURL}/listings?_limit=100
                 `
     );
 
