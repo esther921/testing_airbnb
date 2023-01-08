@@ -1,1 +1,1 @@
-export const apiURL = `http://localhost:8000`;
+export const apiURL = `https://dark-pig-sock.cyclic.app/`;
