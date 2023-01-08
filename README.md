@@ -14,8 +14,8 @@ This is a [Next.js](https://nextjs.org/) project, built with the latest tech sta
 
 - In order to ensure a great user experience for users with low internet speeds, we would need to optimize the application for performance. This would involve techniques such as lazy loading, optimizing images and other assets, and minimizing the number of HTTP requests made by the application.
 
-- As we near the end of the development process, we would conduct thorough testing to ensure that the application is bug-free and ready for deployment. This would involve both manual testing by team members and automated testing using tools such as Jest or Continous integration (CI) tool like Jenkins.
+- As we near the end of the development process, we would conduct thorough testing to ensure that the application is bug-free and ready for deployment. This would involve both manual testing by team members and automated testing using tools such as Jest and Continous integration (CI) tool like Jenkins.
 
 - Once all necessary testing has been completed and any necessary fixes have been made, we would deploy the new front-end application to the production environment and make it available to users.
 
-- Finally, monitor the application after deployment to identify and fix any issues that may arise. This can include using error tracking tools such as Sentry or Rollbar to identify and fix production issues in real-time. Regularly release updates and new features to keep the application up-to-date and address any identified issues.
+- Finally, we would monitor the application after deployment to identify and fix any issues that may arise. This can include using error tracking tools such as Sentry or Rollbar to identify and fix production issues in real-time. We would also regularly release updates and new features to keep the application up-to-date and address any identified issues.
