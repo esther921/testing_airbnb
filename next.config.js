@@ -5,6 +5,14 @@ const nextConfig = {
 };
 
 module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: "/api/listings",
+        destination: "https://dark-pig-sock.cyclic.app/",
+      },
+    ];
+  },
   images: {
     domains: ["images.unsplash.com"],
   },
