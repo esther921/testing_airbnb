@@ -58,7 +58,12 @@ export default function Property({ listingData }: listingDataProp) {
     }
   );
 
-  const [listing] = query.data.data;
+  let listing;
+  if (query) {
+    [listing] = query.data.data;
+  } else {
+    [listing] = listingData.listings;
+  }
 
   return (
     <>
